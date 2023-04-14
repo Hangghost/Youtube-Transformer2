@@ -17,7 +17,7 @@
   <body>
     <div class="center container">
       <form method="POST">
-        <h1>歡迎來到Dr. J的影片下載網頁</h1>
+        <h1>歡迎來到Dr. J的影片下載網頁(Demo版)</h1>
         <div class="form-group mx-sm-3 mb-2">
         <input
           type="text"
@@ -27,9 +27,10 @@
           placeholder="貼上Youtube網址"
         />
         </div>
-        
         <!-- id:後端辨識用，name:網頁中的名字，placeholder:空白時的字 -->
-        <button type="submit" class="btn btn-primary">點擊下載</button>
+        
+        <button type="submit" class="btn btn-primary" name = "action" value = "loadtoSQL" >存取檔案</button>
+        <button type="submit" class="btn btn-primary" name = "action" value = "download">點擊下載</button>
       </form>
     </div>
     
