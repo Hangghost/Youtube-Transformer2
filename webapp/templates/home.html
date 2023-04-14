@@ -62,13 +62,13 @@
 
     <script>
   function deleteVideo(id) {
-    if (confirm("Are you sure to delete this video?")) {
+    if (confirm("確定要刪除這個檔案嗎?")) {
       fetch("/delete/" + id, {method: "POST"})
         .then(response => {
           if (response.ok) {
             location.reload();
           } else {
-            alert("Failed to delete video.");
+            alert("刪除失敗，請重新操作一次。");
           }
         });
     }

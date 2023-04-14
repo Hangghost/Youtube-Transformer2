@@ -30,9 +30,11 @@ def download_youtube_video():
   
     # 下載影片到伺服器
     get_video = youtube_video_object.streams.get_highest_resolution()
-  
+
+    
     # 讓用戶端下載，選擇存放路徑
     return send_file(get_video.download(), as_attachment=True)
+    #redirect(url_for("home.download_youtube_video"))
   
   # 如果不是POST就執行GET
   else:
@@ -54,3 +56,8 @@ def delete_video(id):
 
   # 返回首頁
   return redirect(url_for("home.download_youtube_video"))
+
+
+if __name__ == '__main__':
+    db.create_all()
+    app.run(debug=True)
