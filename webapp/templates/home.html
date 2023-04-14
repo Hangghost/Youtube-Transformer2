@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <title>下載網頁嘍</title>
+    <!-- CSS用法-->
+    <style>
+      .center{
+        text-align: center;
+        
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div class="center container">
+      <form method="POST">
+        <h1>歡迎來到Dr. J的影片下載網頁</h1>
+        <div class="form-group mx-sm-3 mb-2">
+        <input
+          type="text"
+          class="form-control"
+          id="downloadUrl"  
+          name="downloadUrl"
+          placeholder="貼上Youtube網址"
+        />
+        </div>
+        
+        <!-- id:後端辨識用，name:網頁中的名字，placeholder:空白時的字 -->
+        <button type="submit" class="btn btn-primary">點擊下載</button>
+      </form>
+    </div>
+    
+    <div class=container>
+      <table class="table table-hover">
+        <thead>
+          <!-- tr為每一行的意思 -->
+          <tr>
+            <!-- th為每一行標題的意思 -->
+            <th scope="col">影片名稱</th>
+            <th scope="col">創作者</th>
+            <th scope="col">觀看數量</th>
+            <th scope="col">刪除資料</th> 
+            <!-- 新增一欄顯示刪除按鈕 -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for video in videos %}
+          <tr>
+            <!-- td為每一行資料的意思 -->
+            <td>{{video.video_title}}</td>
+            <td>{{video.author}}</td>
+            <td>{{video.views}}</td>
+            <td><button onclick="deleteVideo({{ video.id }})">刪除</button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+  function deleteVideo(id) {
+    if (confirm("Are you sure to delete this video?")) {
+      fetch("/delete/" + id, {method: "POST"})
+        .then(response => {
+          if (response.ok) {
+            location.reload();
+          } else {
+            alert("Failed to delete video.");
+          }
+        });
+    }
+  }
+    </script>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+</html>
